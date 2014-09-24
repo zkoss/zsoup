@@ -3,15 +3,15 @@
   <modelVersion>4.0.0</modelVersion>
   <name>jsoup</name>
 
-  <groupId>org.jsoup</groupId>
-  <artifactId>jsoup</artifactId>
+  <groupId>org.zkoss</groupId>
+  <artifactId>zsoup</artifactId>
   <version>1.7.4-SNAPSHOT</version>
-  <description>jsoup HTML parser</description>
-  <url>http://jsoup.org/</url>
+  <description>zsoup HTML parser</description>
+  <url>http://www.zkoss.org</url>
   <inceptionYear>2009</inceptionYear>
   <issueManagement>
   	<system>GitHub</system>
-  	<url>http://github.com/jhy/jsoup/issues</url>
+  	<url>http://github.com/zkoss/zsoup/issues</url>
   </issueManagement>
   <licenses>
   	<license>
@@ -21,13 +21,12 @@
   	</license>  
   </licenses>
   <scm>
-  	<url>http://github.com/jhy/jsoup</url>
-    <connection>scm:git:http://github.com/jhy/jsoup.git</connection>
-    <!-- <developerConnection>scm:git:git@github.com:jhy/jsoup.git</developerConnection> -->
+  	<url>https://github.com/zkoss/zsoup</url>
+    <connection>scm:git:http://github.com/zkoss/zsoup.git</connection>
   </scm>
   <organization>
-  	<name>Jonathan Hedley</name>
-  	<url>http://jonathanhedley.com/</url>
+  	<name>Potix</name>
+  	<url>http://www.zkoss.org</url>
   </organization>
 
   <build>
@@ -99,7 +98,7 @@
         </executions>
         <configuration>
           <instructions>
-            <Bundle-DocURL>http://jsoup.org/</Bundle-DocURL>
+            <Bundle-DocURL>http://www.zkoss.org/</Bundle-DocURL>
           </instructions>
         </configuration>
       </plugin>
@@ -184,13 +183,20 @@
 
   <developers>
     <developer>
-      <id>jhy</id>
-      <name>Jonathan Hedley</name>
-      <email>jonathan@hedley.net</email>
+      <id>zkteam</id>
+      <name>ZK Team</name>
+      <email>info@zkoss.org</email>
+      <url>http://www.zkoss.org</url>
+      <organization>Potix</organization>
+      <organizationUrl>http://www.zkoss.org</organizationUrl>
       <roles>
-        <role>Lead Developer</role>
+        <role>architect</role>
+        <role>developer</role>
       </roles>
-      <timezone>+11</timezone>
+      <timezone>8</timezone>
+      <properties>
+        <picUrl>http://www.zkoss.org</picUrl>
+      </properties>
     </developer>
   </developers>
 
