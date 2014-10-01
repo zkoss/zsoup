@@ -177,4 +177,7 @@ public class Parser {
     public static Parser xmlParser() {
         return new Parser(new XmlTreeBuilder());
     }
+    public static Parser xhtmlParser() {
+        return new Parser(new XHtmlTreeBuilder());
+    }
 }

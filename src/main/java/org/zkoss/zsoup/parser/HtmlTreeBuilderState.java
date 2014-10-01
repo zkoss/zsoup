@@ -58,7 +58,7 @@ enum HtmlTreeBuilderState {
         }
 
         private boolean anythingElse(Token t, HtmlTreeBuilder tb) {
-            tb.insert("html");
+//            tb.insert("html");
             tb.transition(BeforeHead);
             return tb.process(t);
         }
@@ -85,7 +85,8 @@ enum HtmlTreeBuilderState {
                 tb.error(this);
                 return false;
             } else {
-                tb.process(new Token.StartTag("head"));
+//                tb.process(new Token.StartTag("head"));
+            	tb.transition(AfterHead);
                 return tb.process(t);
             }
             return true;
@@ -238,8 +239,9 @@ enum HtmlTreeBuilderState {
         }
 
         private boolean anythingElse(Token t, HtmlTreeBuilder tb) {
-            tb.process(new Token.StartTag("body"));
+//            tb.process(new Token.StartTag("body"));
             tb.framesetOk(true);
+            tb.transition(InBody);
             return tb.process(t);
         }
     },
@@ -876,7 +878,7 @@ enum HtmlTreeBuilderState {
                 }
                 return true; // todo: as above todo
             } else if (t.isEOF()) {
-                if (tb.currentElement().nodeName().equals("html"))
+                if (!tb.stack.isEmpty() && tb.currentElement().nodeName().equals("html"))
                     tb.error(this);
                 return true; // stops parsing
             }

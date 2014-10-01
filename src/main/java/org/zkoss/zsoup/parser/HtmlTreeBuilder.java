@@ -238,7 +238,7 @@ class HtmlTreeBuilder extends TreeBuilder {
         currentElement().appendChild(node); // doesn't use insertNode, because we don't foster these; and will always have a stack.
     }
 
-    private void insertNode(Node node) {
+    /*package*/ void insertNode(Node node) {
         // if the stack hasn't been set up yet, elements (doctype, comments) go into the doc
         if (stack.size() == 0)
             doc.appendChild(node);
@@ -404,7 +404,7 @@ class HtmlTreeBuilder extends TreeBuilder {
         Iterator<Element> it = stack.descendingIterator();
         while (it.hasNext()) {
             Element node = it.next();
-            if (!it.hasNext()) {
+            if (!it.hasNext() && contextElement != null) {
                 last = true;
                 node = contextElement;
             }
@@ -456,9 +456,12 @@ class HtmlTreeBuilder extends TreeBuilder {
 
     private boolean inSpecificScope(String[] targetNames, String[] baseTypes, String[] extraTypes) {
         Iterator<Element> it = stack.descendingIterator();
+        if (stack.isEmpty()) return false;
         while (it.hasNext()) {
             Element el = it.next();
             String elName = el.nodeName();
+            if (elName.contains(":"))
+            	return false;
             if (StringUtil.in(elName, targetNames))
                 return true;
             if (StringUtil.in(elName, baseTypes))

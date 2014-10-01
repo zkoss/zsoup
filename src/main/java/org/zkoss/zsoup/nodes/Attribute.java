@@ -18,6 +18,7 @@ public class Attribute implements Map.Entry<String, String>, Cloneable  {
     };
 
     private String key;
+    private String originalKey;
     private String value;
 
     /**
@@ -29,12 +30,19 @@ public class Attribute implements Map.Entry<String, String>, Cloneable  {
     public Attribute(String key, String value) {
         Validate.notEmpty(key);
         Validate.notNull(value);
-        this.key = key.trim().toLowerCase();
+        originalKey = key.trim();
+        this.key = originalKey.toLowerCase();
         this.value = value;
     }
 
     /**
-     Get the attribute key.
+     * Returns the original key
+     */
+    public String getOriginalKey() {
+    	return originalKey;
+    }
+    /**
+     Get the attribute key in lower case.
      @return the attribute key
      */
     public String getKey() {
