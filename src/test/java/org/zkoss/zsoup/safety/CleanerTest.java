@@ -186,4 +186,11 @@ public class CleanerTest {
     @Test public void cleansInternationalText() {
         assertEquals("привет", Zsoup.clean("привет", Whitelist.none()));
     }
+
+    @Test
+    public void testScriptTagInWhiteList() {
+        Whitelist whitelist = Whitelist.relaxed();
+        whitelist.addTags( "script" );
+        assertTrue( Jsoup.isValid("Hello<script>alert('Doh')</script>World !", whitelist ) );
+    }
 }
