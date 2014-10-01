@@ -191,6 +191,6 @@ public class CleanerTest {
     public void testScriptTagInWhiteList() {
         Whitelist whitelist = Whitelist.relaxed();
         whitelist.addTags( "script" );
-        assertTrue( Jsoup.isValid("Hello<script>alert('Doh')</script>World !", whitelist ) );
+        assertTrue( Zsoup.isValid("Hello<script>alert('Doh')</script>World !", whitelist ) );
     }
 }

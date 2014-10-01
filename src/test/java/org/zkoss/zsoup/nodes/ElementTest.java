@@ -377,7 +377,7 @@ public class ElementTest {
     }
 
     @Test public void testSetHtmlTitle() {
-        Document doc = Jsoup.parse("<html><head id=2><title id=1></title></head></html>");
+        Document doc = Zsoup.parse("<html><head id=2><title id=1></title></head></html>");
 
         Element title = doc.getElementById("1");
         title.html("good");
@@ -703,7 +703,7 @@ public class ElementTest {
 
     @Test
     public void testCssPath() {
-        Document doc = Jsoup.parse("<div id=\"id1\">A</div><div>B</div><div class=\"c1 c2\">C</div>");
+        Document doc = Zsoup.parse("<div id=\"id1\">A</div><div>B</div><div class=\"c1 c2\">C</div>");
         Element divA = doc.select("div").get(0);
         Element divB = doc.select("div").get(1);
         Element divC = doc.select("div").get(2);

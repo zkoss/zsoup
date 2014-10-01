@@ -282,7 +282,7 @@ public class HtmlParserTest {
     @Test public void handlesProtocolRelativeUrl() {
         String base = "https://example.com/";
         String html = "<img src='//example.net/img.jpg'>";
-        Document doc = Jsoup.parse(html, base);
+        Document doc = Zsoup.parse(html, base);
         Element el = doc.select("img").first();
         assertEquals("https://example.net/img.jpg", el.absUrl("src"));
     }
@@ -819,17 +819,17 @@ public class HtmlParserTest {
 
     @Test public void handlesInvalidDoctypes() {
         // would previously throw invalid name exception on empty doctype
-        Document doc = Jsoup.parse("<!DOCTYPE>");
+        Document doc = Zsoup.parse("<!DOCTYPE>");
         assertEquals(
                 "<!DOCTYPE> <html> <head></head> <body></body> </html>",
                 StringUtil.normaliseWhitespace(doc.outerHtml()));
 
-        doc = Jsoup.parse("<!DOCTYPE><html><p>Foo</p></html>");
+        doc = Zsoup.parse("<!DOCTYPE><html><p>Foo</p></html>");
         assertEquals(
                 "<!DOCTYPE> <html> <head></head> <body> <p>Foo</p> </body> </html>",
                 StringUtil.normaliseWhitespace(doc.outerHtml()));
 
-        doc = Jsoup.parse("<!DOCTYPE \u0000>");
+        doc = Zsoup.parse("<!DOCTYPE \u0000>");
         assertEquals(
                 "<!DOCTYPE �> <html> <head></head> <body></body> </html>",
                 StringUtil.normaliseWhitespace(doc.outerHtml()));
