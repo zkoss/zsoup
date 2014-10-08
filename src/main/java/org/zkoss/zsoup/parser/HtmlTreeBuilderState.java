@@ -260,7 +260,8 @@ enum HtmlTreeBuilderState {
                         tb.insert(c);
                     } else {
                         tb.reconstructFormattingElements();
-                        tb.insert(c);
+                        if (!(tb instanceof XHtmlTreeBuilder && tb.stack.isEmpty()))
+                        	tb.insert(c);
                         tb.framesetOk(false);
                     }
                     break;
@@ -746,7 +747,13 @@ enum HtmlTreeBuilderState {
                         tb.process(new Token.StartTag("br"));
                         return false;
                     } else {
-                        return anyOtherEndTag(t, tb);
+                        if (anyOtherEndTag(t, tb)) {
+                        	if (tb.stack.isEmpty()) {
+	                        	tb.transition(AfterBody);
+	                        }
+                        	return true;
+                        }
+                        return false;
                     }
 
                     break;

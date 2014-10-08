@@ -12,6 +12,7 @@ Copyright (C) 2014 Potix Corporation. All Rights Reserved.
 package org.zkoss.zsoup.parser;
 
 import org.zkoss.zsoup.nodes.Comment;
+import org.zkoss.zsoup.nodes.Document;
 import org.zkoss.zsoup.nodes.Node;
 import org.zkoss.zsoup.nodes.XmlDeclaration;
 
@@ -21,6 +22,23 @@ import org.zkoss.zsoup.nodes.XmlDeclaration;
  *
  */
 public class XHtmlTreeBuilder extends HtmlTreeBuilder {
+	
+	public class ExceptionInfo extends RuntimeException {
+		public ExceptionInfo(Exception e) {
+			super(e);
+		}
+		public Document getCurrentDocument() {
+			return doc;
+		}
+	}
+
+    protected void runParser() {
+        try {
+	        super.runParser();
+        } catch (Exception e) {
+        	throw new ExceptionInfo(e); 
+        }
+    }
 
     void insert(Token.Comment commentToken) {
         Comment comment = new Comment(commentToken.getData(), baseUri);

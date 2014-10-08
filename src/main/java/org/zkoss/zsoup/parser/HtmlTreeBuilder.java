@@ -470,6 +470,9 @@ class HtmlTreeBuilder extends TreeBuilder {
             if (extraTypes != null && StringUtil.in(elName, extraTypes))
                 return false;
         }
+        if (this instanceof XHtmlTreeBuilder)
+        	return false; // the structure may not start with html or body 
+        
         Validate.fail("Should not be reachable");
         return false;
     }
