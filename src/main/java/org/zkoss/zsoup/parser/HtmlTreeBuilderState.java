@@ -138,6 +138,8 @@ enum HtmlTreeBuilderState {
                     } else if (name.equals("head")) {
                         tb.error(this);
                         return false;
+                    } else if (tb instanceof XHtmlTreeBuilder && (name.contains(":") || name.contains("zk"))) {
+                        return insertAnythingElse(t, (XHtmlTreeBuilder) tb);
                     } else {
                         return anythingElse(t, tb);
                     }
@@ -150,6 +152,8 @@ enum HtmlTreeBuilderState {
                         tb.transition(AfterHead);
                     } else if (StringUtil.in(name, "body", "html", "br")) {
                         return anythingElse(t, tb);
+                    } else if (tb instanceof XHtmlTreeBuilder && (name.contains(":") || name.contains("zk"))) {
+                        return insertAnythingElse(t, (XHtmlTreeBuilder) tb);
                     } else {
                         tb.error(this);
                         return false;
@@ -164,6 +168,10 @@ enum HtmlTreeBuilderState {
         private boolean anythingElse(Token t, TreeBuilder tb) {
             tb.process(new Token.EndTag("head"));
             return tb.process(t);
+        }
+
+        private boolean insertAnythingElse(Token t, XHtmlTreeBuilder tb) {
+            return tb.process(t, InBody);
         }
     },
     InHeadNoscript {
