@@ -1,0 +1,42 @@
+#!/bin/bash
+# release
+#
+#	Purpose:
+#		
+#	Description:
+#		
+#	History:
+#		Tue, Nov 11, 2014  3:40:24 PM, Created by jumperchen
+#
+#Copyright (C)  Potix Corporation. All Rights Reserved.
+#
+maindir="$(pwd)"
+ver=$1
+ver=${ver%/}
+stamp=$(date +%Y%m%d)
+target=$2
+target=${target%/}
+if [ $# -lt 1 ] ; then
+	echo "Usage: release [ version ] [ options ] "
+	echo "Available options: 'official'."
+	exit 1
+fi
+
+
+if [ "$target" == "official" ] ; then
+	pver=$ver
+	mver=$ver
+else
+	pver=$ver.FL.$stamp
+	mver=$pver
+fi
+
+
+function upVer {
+	sed -i "1,/version>.*<\/version/s/version>.*<\/version/version>$1<\/version/" $maindir/pom.xml
+}
+
+upVer $mver
+
+
+mvn clean package source:jar javadoc:jar repository:bundle-create
