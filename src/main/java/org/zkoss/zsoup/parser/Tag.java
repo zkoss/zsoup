@@ -25,7 +25,7 @@ public class Tag {
     private boolean formSubmit = false; // a control that can be submitted in a form: input etc
 
     private Tag(String tagName) {
-        this.tagName = tagName.toLowerCase();
+    	this.tagName = tagName;
     }
 
     /**
@@ -50,7 +50,7 @@ public class Tag {
         Tag tag = tags.get(tagName);
 
         if (tag == null) {
-            tagName = tagName.trim().toLowerCase();
+            tagName = tagName.trim();
             Validate.notEmpty(tagName);
             tag = tags.get(tagName);
 

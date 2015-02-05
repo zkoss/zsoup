@@ -182,7 +182,7 @@ enum TokeniserState {
         // from < or </ in data, will have start or end tag pending
         void read(Tokeniser t, CharacterReader r) {
             // previous TagOpen state did NOT consume, will have a letter char in current
-            String tagName = r.consumeToAny('\t', '\n', '\r', '\f', ' ', '/', '>', nullChar).toLowerCase();
+            String tagName = r.consumeToAny('\t', '\n', '\r', '\f', ' ', '/', '>', nullChar);
             t.tagPending.appendTagName(tagName);
 
             switch (r.consume()) {
