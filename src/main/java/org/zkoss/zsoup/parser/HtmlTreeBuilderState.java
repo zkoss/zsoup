@@ -1327,7 +1327,8 @@ enum HtmlTreeBuilderState {
     AfterBody {
         boolean process(Token t, HtmlTreeBuilder tb) {
             if (isWhitespace(t)) {
-                return tb.process(t, InBody);
+            	if (!(tb instanceof XHtmlTreeBuilder) || !tb.stack.isEmpty())
+            		return tb.process(t, InBody);
             } else if (t.isComment()) {
                 tb.insert(t.asComment()); // into html node
             } else if (t.isDoctype()) {
