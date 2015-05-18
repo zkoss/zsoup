@@ -39,4 +39,4 @@ function upVer {
 upVer $mver
 
 
-mvn clean package source:jar javadoc:jar repository:bundle-create
+mvn -Dmaven.test.skip=true clean package source:jar javadoc:jar repository:bundle-create
