@@ -264,8 +264,10 @@ enum HtmlTreeBuilderState {
                         tb.error(this);
                         return false;
                     } else if (tb.framesetOk() && isWhitespace(c)) { // don't check if whitespace if frames already closed
-                        tb.reconstructFormattingElements();
-                        tb.insert(c);
+                    	if (!(tb instanceof XHtmlTreeBuilder) || !tb.stack.isEmpty()) {
+	                        tb.reconstructFormattingElements();
+	                        tb.insert(c);
+                    	}
                     } else {
                         tb.reconstructFormattingElements();
                         if (!(tb instanceof XHtmlTreeBuilder && tb.stack.isEmpty()))
