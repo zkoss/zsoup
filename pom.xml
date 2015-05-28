@@ -5,7 +5,7 @@
 
   <groupId>org.zkoss</groupId>
   <artifactId>zsoup</artifactId>
-  <version>1.8.2.4</version>
+  <version>1.8.2.5</version>
   <description>zsoup HTML parser</description>
   <url>http://www.zkoss.org</url>
   <inceptionYear>2009</inceptionYear>
@@ -128,6 +128,13 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
         <version>2.4</version>
+      </plugin>
+      <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <configuration>
+            <additionalparam>-Xdoclint:none</additionalparam>
+          </configuration>
       </plugin>
     </plugins>
     <resources>
