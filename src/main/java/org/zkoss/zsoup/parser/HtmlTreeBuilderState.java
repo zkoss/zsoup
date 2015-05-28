@@ -3,6 +3,7 @@ package org.zkoss.zsoup.parser;
 import org.zkoss.zsoup.helper.DescendableLinkedList;
 import org.zkoss.zsoup.helper.StringUtil;
 import org.zkoss.zsoup.nodes.*;
+import org.zkoss.zsoup.parser.Token.TokenType;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -160,6 +161,17 @@ enum HtmlTreeBuilderState {
                     }
                     break;
                 default:
+                	if (t.type == TokenType.Character) {
+                		final String eleName = tb.currentElement().tagName();
+                		if (tb instanceof XHtmlTreeBuilder && (eleName.contains(":") || eleName.contains("zk"))) {
+                			Token.Character c = t.asCharacter();
+                            tb.reconstructFormattingElements();
+                            if (!(tb instanceof XHtmlTreeBuilder && tb.stack.isEmpty()))
+                                	tb.insert(c);
+                            tb.framesetOk(false);
+                            return true;
+                		}
+                	}
                     return anythingElse(t, tb);
             }
             return true;
